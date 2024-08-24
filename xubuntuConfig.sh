@@ -63,7 +63,6 @@ echo -e "${boldGreen}\nInstalando o logo-ls:\n${reset}"
 cd ~/Downloads
 curl -OL https://github.com/Yash-Handa/logo-ls/releases/download/v1.3.7/logo-ls_amd64.deb
 sudo dpkg -i ~/Downloads/logo-ls_amd64.deb || { echo -e "${boldRed}\nFalha ao instalar o logo-ls.\n${reset}"; exit 1; }
-
 # Baixar configurações prontas do XFCE4 manager
 echo -e "${boldGreen}\nBaixando configurações prontas do XFCE4 manager...\n${reset}"
 git clone https://github.com/leodionisiolima/xubuntuConfig
@@ -72,53 +71,49 @@ cp -r ~/Downloads/xubuntuConfig/* ~/.config/xfce4/ || { echo -e "${boldRed}\nFal
 # Remapear a tecla Super para CAPS e remover o Ctrl direito
 echo -e 'keycode 133 = Caps_Lock\nremove control = Control_R' > ~/.Xmodmap
 
-#Redireciona o apt para o nala
-sudo ln -sf /usr/bin/nala /usr/local/bin/apt
-
 cd ~ && source .bashrc
 ## Daqui pra cima ↑ está tudo consolidado, funcionando.
 ## Daqui pra baixo ↓ está tudo em teste
 
 # Avisando que vai fazer backup do binário original do apt
-echo -e "\e[1;32mIniciando backup do binário original do apt...\e[0m"
+echo -e "${boldGreen}Iniciando backup do binário original do apt...${reset}"
 sudo mv /usr/bin/apt /usr/bin/apt.backup
 if [ $? -eq 0 ]; then
-    echo -e "\e[1;32mBackup do apt criado com sucesso.\e[0m"
+    echo -e "${boldGreen}Backup do apt criado com sucesso.${reset}"
 else
-    echo -e "\e[1;31mFalha ao criar backup do apt.\e[0m"
+    echo -e "${boldRed}Falha ao criar backup do apt.${reset}"
     exit 1
 fi
 
 # Avisando que vai criar um link simbólico para nala como apt
-echo -e "\e[1;32mCriando link simbólico de apt para nala...\e[0m"
-sudo ln -s /usr/bin/nala /usr/bin/apt
+echo -e "${boldGreen}Criando link simbólico de apt para nala...${reset}"
+sudo ln -sf /usr/bin/nala /usr/bin/apt
 if [ $? -eq 0 ]; then
-    echo -e "\e[1;32mLink simbólico de apt para nala criado com sucesso.\e[0m"
+    echo -e "${boldGreen}Link simbólico de apt para nala criado com sucesso.${reset}"
 else
-    echo -e "\e[1;31mFalha ao criar link simbólico.\e[0m"
+    echo -e "${boldRed}Falha ao criar link simbólico.${reset}"
     exit 1
 fi
 
 # Avisando que vai fazer backup do binário original do nano
-echo -e "\e[1;32mIniciando backup do binário original do nano...\e[0m"
+echo -e "${boldGreen}Iniciando backup do binário original do nano...${reset}"
 sudo mv /usr/bin/nano /usr/bin/nano.backup
 if [ $? -eq 0 ]; then
-    echo -e "\e[1;32mBackup do nano criado com sucesso.\e[0m"
+    echo -e "${boldGreen}Backup do nano criado com sucesso.${reset}"
 else
-    echo -e "\e[1;31mFalha ao criar backup do nano.\e[0m"
+    echo -e "${boldRed}Falha ao criar backup do nano.${reset}"
     exit 1
 fi
 
 # Avisando que vai criar um link simbólico para micro como nano
-echo -e "\e[1;32mCriando link simbólico de nano para micro...\e[0m"
-sudo ln -s /usr/bin/micro /usr/bin/nano
+echo -e "${boldGreen}Criando link simbólico de nano para micro...${reset}"
+sudo ln -sf /usr/bin/micro /usr/bin/nano
 if [ $? -eq 0 ]; then
-    echo -e "\e[1;32mLink simbólico de nano para micro criado com sucesso.\e[0m"
+    echo -e "${boldGreen}Link simbólico de nano para micro criado com sucesso.${reset}"
 else
-    echo -e "\e[1;31mFalha ao criar link simbólico.\e[0m"
+    echo -e "${boldRed}Falha ao criar link simbólico.${reset}"
     exit 1
 fi
-
 
 
 #Fim da configuração.
