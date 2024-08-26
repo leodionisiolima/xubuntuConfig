@@ -9,41 +9,6 @@ reset="\033[0m"
 echo -e "${boldGreen}\nAtualizando o sistema...\n${reset}"
 sudo apt update && sudo apt upgrade -y
 
-# Baixar a página de lançamentos do GitLab
-echo -e "${boldGreen}\nBuscando a versão mais recente do Nala...\n${reset}"
-releasePage=$(curl -s https://gitlab.com/volian/nala/-/releases)
-
-# Extrair o link do arquivo .deb mais recente
-latestDebUrl=$(echo "$releasePage" | grep -oP 'https://gitlab.com/volian/nala/-/releases/[^"]+nala_[^"]+_all.deb' | head -n 1)
-
-# Verificar se conseguimos obter o link do .deb
-if [[ -z "$latestDebUrl" ]]; then
-    echo -e "${boldRed}Erro ao obter o link da versão mais recente do Nala. Abortando o script.${reset}"
-    exit 1
-fi
-
-# Baixar o arquivo .deb mais recente
-echo -e "${boldGreen}\nBaixando o Nala...\n${reset}"
-wget "$latestDebUrl" -O ~/Downloads/nala_latest.deb
-
-# Verificar se o download foi bem-sucedido
-if [[ ! -f ~/Downloads/nala_latest.deb ]]; then
-    echo -e "${boldRed}Erro ao baixar o Nala. Abortando o script.${reset}"
-    exit 1
-fi
-
-# Instalar o arquivo .deb
-echo -e "${boldGreen}\nInstalando o Nala...\n${reset}"
-sudo dpkg -i ~/Downloads/nala_latest.deb
-sudo apt --fix-broken install -y
-
-# Verificar se o Nala foi instalado com sucesso
-if ! command -v nala &> /dev/null; then
-    echo -e "${boldRed}Erro ao instalar o Nala. Abortando o script.${reset}"
-    exit 1
-fi
-
-
 # Captura o nome do usuário atual
 currentUser=$(whoami)
 
