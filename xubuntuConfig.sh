@@ -106,7 +106,6 @@ if command -v nala >/dev/null 2>&1; then
     fi
 else
     echo -e "${boldRed}Nala não está instalado.${reset}"
-    exit 1
 fi
 
 # Avisando que vai fazer backup do binário original do nano
