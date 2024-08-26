@@ -1,7 +1,12 @@
 #!/bin/bash
 
-sudo -u leo mkdir -p /home/leo/{Desktop,Documents,Downloads,Pictures,Videos,Music,Public,Templates}
-sudo -u leo mkdir -p /home/leo/.config/xfce4
+
+# Captura o nome do usuário atual
+currentUser=$(whoami)
+
+# Cria diretórios para o usuário atual
+sudo -u "$currentUser" mkdir -p "/home/$currentUser/{Desktop,Documents,Downloads,Pictures,Videos,Music,Public,Templates}"
+sudo -u "$currentUser" mkdir -p "/home/$currentUser/.config/xfce4"
 
 # Definir a sequência de escape para verde negrito e vermelho negrito
 boldGreen="\033[1;32m"
